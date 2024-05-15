@@ -1,0 +1,26 @@
+{
+  "name": "js-facebook-messenger-bot",
+  "version": "1.0.0",
+  "description": "An application that connects with a Facebook page and processes the incoming messages from that Facebook page.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lslsilva86/node-js-facebook-messenger-bot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lslsilva86/node-js-facebook-messenger-bot/issues"
+  },
+  "homepage": "https://github.com/lslsilva86/node-js-facebook-messenger-bot#readme",
+  "dependencies": {
+    "@types/express": "^4.17.21",
+    "@types/mysql": "^2.15.26",
+    "@types/node": "^20.12.12",
+    "@types/nodemailer": "^6.4.15",
+    "typescript": "^5.4.5"
+  }
+}
