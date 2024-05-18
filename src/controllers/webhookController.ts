@@ -42,14 +42,16 @@ export const handleWebhookEvent = async (req: Request, res: Response): Promise<v
           if (!isInitialInteraction) {
             if (messageText.startsWith('/desc ')) {
               const productId = messageText.replace('/desc ', '').trim();
-              responseText = await getProductDescription(productId);
+              const description = await getProductDescription(productId);
+              responseText = `Product Description : $${description}`;
             } else if (messageText.startsWith('/price ')) {
               const productId = messageText.replace('/price ', '').trim();
               const price = await getProductPrice(productId);
               responseText = `The price of the product is $${price}`;
             } else if (messageText.startsWith('/shipping ')) {
               const productId = messageText.replace('/shipping ', '').trim();
-              responseText = await getProductShippingFee(productId);
+              const shipping = await getProductShippingFee(productId);
+              responseText = `The shipping cost the product is $${shipping}`;
             } else if (messageText.startsWith('/buy ')) {
               const productId = messageText.replace('/buy ', '').trim();
               responseText = await handleBuyProduct(senderPsid, productId);
