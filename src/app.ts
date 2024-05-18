@@ -7,7 +7,6 @@ import ngrok from 'ngrok';
 import webhookRoutes from './routes/webhookRoutes';
 import { PORT } from './config';
 import sequelize from './services/dbService';
-import User from './models/User';
 
 const app = express();
 
@@ -18,7 +17,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Routes
 app.use('/webhook', webhookRoutes);
 
-// Sync database and start server
 sequelize.sync().then(() => {
   app.listen(PORT, async () => {
     console.log(`Server is running on port ${PORT}`);
