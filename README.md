@@ -4,6 +4,13 @@
 
 Develop an application that connects with a Facebook page and processes the incoming messages from that Facebook page.
 
+## Get Started
+
+- change .env file values
+- npm i
+- npm start
+- Set the webhook callback URL in the Facebook App Dashboard: eg: https://respondio.ap.ngrok.io/webhook
+
 ## Technologies used:
 
 - node.js
