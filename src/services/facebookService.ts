@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { PAGE_ACCESS_TOKEN } from '../config';
+import { PAGE_ACCESS_TOKEN, FB_URL_PROFILE } from '../config';
 
 export const getUserProfile = async (psid: string): Promise<{ name: string }> => {
   try {
-    const response = await axios.get(`https://graph.facebook.com/${psid}`, {
+    const response = await axios.get(`${FB_URL_PROFILE}${psid}`, {
       params: {
         access_token: PAGE_ACCESS_TOKEN,
         fields: 'name',
