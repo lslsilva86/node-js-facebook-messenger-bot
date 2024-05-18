@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { PAGE_ACCESS_TOKEN } from '../config';
-import User from '../models/User';
+import User from '../models/user';
 
 const greetings = ['How are you?', 'I hope you are doing well.', 'I hope you’re having a great day.'];
 
