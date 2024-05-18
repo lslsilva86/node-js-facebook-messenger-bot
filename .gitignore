@@ -2,3 +2,4 @@
 node_modules
 src/config/db.ts
 .env
+backup
