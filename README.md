@@ -55,7 +55,7 @@ Error handling through the use of try-catch blocks and proper logging mechanisms
 
 Completed unit testing using Jest for controllers and services.
 
-![](https://github.com/lslsilva86/node-js-facebook-messenger-bot/blob/322680ae81f12bf53b75701033eea96382f1cabf/screens/14_test-results.png)
+![](https://github.com/lslsilva86/node-js-facebook-messenger-bot/blob/70cf146230c74e6091aa27262a20e421b0ec2f44/screens/14_test-results.png)
 
 ## Challenges
 
