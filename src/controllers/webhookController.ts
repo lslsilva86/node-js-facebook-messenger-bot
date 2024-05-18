@@ -1,6 +1,11 @@
 import { Request, Response } from 'express';
-import { getProductDescription, getProductPrice, getProductShippingFee } from '../services/productService';
-import { handleMessage } from '../services/messengerService';
+import {
+  getProductDescription,
+  getProductPrice,
+  getProductShippingFee,
+  handleBuyProduct,
+} from '../services/productService';
+import { handleMessage, isFirstInteraction } from '../services/messengerService';
 
 export const verifyWebhook = (req: Request, res: Response): void => {
   const VERIFY_TOKEN = process.env.VERIFY_TOKEN || '';
@@ -31,32 +36,39 @@ export const handleWebhookEvent = async (req: Request, res: Response): Promise<v
       if (receivedMessage && receivedMessage.text) {
         const messageText: string = receivedMessage.text;
         let responseText: string;
+        const isInitialInteraction = await isFirstInteraction(senderPsid);
 
         try {
-          if (messageText.startsWith('/desc ')) {
-            const productId = messageText.replace('/desc ', '').trim();
-            responseText = await getProductDescription(productId);
-          } else if (messageText.startsWith('/price ')) {
-            const productId = messageText.replace('/price ', '').trim();
-            const price = await getProductPrice(productId);
-            responseText = `The price of the product is $${price}`;
-          } else if (messageText.startsWith('/shipping ')) {
-            const productId = messageText.replace('/shipping ', '').trim();
-            responseText = await getProductShippingFee(productId);
+          if (!isInitialInteraction) {
+            if (messageText.startsWith('/desc ')) {
+              const productId = messageText.replace('/desc ', '').trim();
+              responseText = await getProductDescription(productId);
+            } else if (messageText.startsWith('/price ')) {
+              const productId = messageText.replace('/price ', '').trim();
+              const price = await getProductPrice(productId);
+              responseText = `The price of the product is $${price}`;
+            } else if (messageText.startsWith('/shipping ')) {
+              const productId = messageText.replace('/shipping ', '').trim();
+              responseText = await getProductShippingFee(productId);
+            } else if (messageText.startsWith('/buy ')) {
+              const productId = messageText.replace('/buy ', '').trim();
+              responseText = await handleBuyProduct(senderPsid, productId);
+            } else {
+              responseText = "Sorry, I didn't understand that query. How can I assist you further?";
+            }
           } else {
-            responseText = "Sorry, I didn't understand that command.";
+            responseText = 'Hi there! How can I assist you today?';
           }
-          await handleMessage(senderPsid, { text: responseText });
         } catch (error) {
-          if (error instanceof Error) {
-            await handleMessage(senderPsid, { text: 'Error: ' + error.message });
+          if (error instanceof Error && error.message === 'ProductNotFound') {
+            responseText = 'Sorry, the product you are looking for is not available.';
           } else {
-            await handleMessage(senderPsid, { text: 'An unknown error occurred.' });
+            responseText = "Sorry, I didn't understand that query. How can I assist you further?";
           }
         }
+        await handleMessage(senderPsid, { text: responseText }, isInitialInteraction);
       }
     }
-
     res.status(200).send('EVENT_RECEIVED');
   } else {
     res.sendStatus(404);

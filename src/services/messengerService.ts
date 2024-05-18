@@ -34,14 +34,17 @@ export const sendMessage = async (senderId: string, message: string): Promise<vo
   }
 };
 
-export const handleMessage = async (senderPsid: string, response: any): Promise<void> => {
+export const handleMessage = async (
+  senderPsid: string,
+  response: any,
+  isInitialInteraction: boolean
+): Promise<void> => {
   try {
-    const isFirst = await isFirstInteraction(senderPsid);
-    if (isFirst) {
+    if (isInitialInteraction) {
       await sendGreetingMessage(senderPsid);
+    } else {
+      await sendMessage(senderPsid, response.text);
     }
-
-    await sendMessage(senderPsid, response.text);
   } catch (err) {
     console.error('Error handling message:', err);
   }
