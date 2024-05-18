@@ -1,4 +1,4 @@
-import Product from '../models/Product';
+import Product from '../models/product';
 import { getUserProfile } from './facebookService';
 import { sendEmail } from './emailService';
 
