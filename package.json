@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "start": "nodemon --exec 'npx ts-node' src/app.ts",
-    "test": "jest --detectOpenHandles"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -31,7 +31,6 @@
     "express": "^4.19.2",
     "mysql2": "^3.9.7",
     "ngrok": "^5.0.0-beta.2",
-    "nock": "^13.5.4",
     "sequelize": "^6.37.3",
     "sequelize-typescript": "^2.1.6",
     "typescript": "^5.4.5"

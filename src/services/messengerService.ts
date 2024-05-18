@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { PAGE_ACCESS_TOKEN } from '../config';
+import { PAGE_ACCESS_TOKEN, FB_URL_MESSENGER } from '../config';
 import User from '../models/user';
 
 const greetings = ['How are you?', 'I hope you are doing well.', 'I hope you’re having a great day.'];
@@ -25,7 +25,7 @@ export const sendMessage = async (senderId: string, message: string): Promise<vo
   };
 
   try {
-    await axios.post(`https://graph.facebook.com/v12.0/me/messages`, requestBody, {
+    await axios.post(FB_URL_MESSENGER, requestBody, {
       params: { access_token: PAGE_ACCESS_TOKEN },
     });
     console.log('message sent!');
