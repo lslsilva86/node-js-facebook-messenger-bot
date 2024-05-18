@@ -2,7 +2,9 @@
 
 ## Introduction
 
-Develop an application that connects with a Facebook page and processes the incoming messages from that Facebook page.
+An application that connects with a Facebook page and processes the incoming messages from that Facebook page.
+
+![](https://github.com/lslsilva86/node-js-facebook-messenger-bot/blob/322680ae81f12bf53b75701033eea96382f1cabf/screens/0_intro.png)
 
 ## Get Started
 
